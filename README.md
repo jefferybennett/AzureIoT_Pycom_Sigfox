@@ -39,7 +39,7 @@ San Francisco, e-Mail Jeff Bennett at jbennett@microsoft.com to receive the code
 # Software Requirements
 
 For this lab, we'll use the Azure IoT Suite Remote Monitoring solution to view the data flowing from our Pycom device.
-However, if you'd prefer to skip using the Remote Monitoring solution, or have another way of viewing the data
+However, if you'd prefer to skip using the Remote Monitoring solution, or would like another way of viewing the data
 flowing from your device, you can install the Azure IoT Device Explorer (for Windows users) or, alternatively,
 the Azure IoT Hub Explorer for Non-Windows users with Node.js installed.
 
@@ -72,6 +72,60 @@ Once the provisioning process is complete, you can click the "Launch" button und
 
 You can also navigate to https://[solution name].azurewebsites.net/Dashboard/Index
 
+# Register your Pycom device with Azure IoT
+Every device which communicates with Azure IoT must be registered, specifically with the Azure IoT Hub service.  By
+registering your device, you create an unique registry entry and identity for the device (allowing, for example,
+per device authentication to Azure IoT Hub).
+
+### Register device using the Azure IoT Suite Remote Monitoring portal
+The Remote Monitoring portal provides a mechanism to register devices with its associated Azure IoT Hub service.
+
+- Open the Azure IoT Suite Remote Monitoring portal (if you've not already done so.)
+- In the lower left-hand corner of the portal, click "Add a Device".
+- Under "Simulated Device", click the "Add New" button.
+- Click the "Let me define my own Device ID" radio button.
+- Enter a device id in the "Enter a Device ID" textbox and click the "Check ID" button.
+    - Device id's in Azure IoT must be unique and are also case-sensitive.
+- Click the "Create" button.
+- For easy reference, copy the "Device ID", "IoT Hub Hostname", and "Device Key" attributes to an easily referencable location
+on your computer (eg. Notepad, etc.).
+
+For reference, the Azure IoT Hub device connection string, would then be the following ...
+```text
+HostName=[IoT Hub Hostname];DeviceId=[Device ID];SharedAccessKey=[Device Key]
+```
+
+### Register device using Device Explorer or Hub Explorer
+You can also register devices using the Device Explorer or Hub Explorer.  However, if you're using the Azure Iot Suite
+Remote Monitoring solution, you'll want to register the device in the Remote Monitoring portal.
+
+# Locate your Azure IoT Hub iothubowner connection string
+The Azure IoT Hub iothubowner connection string can be used by various clients to connect to the Azure IoT Hub instance
+with full permissions.  You'll need this connection string if you're using the Device Explorer or Hub Explorer.
+
+- In the Azure management portal at [https://portal.azure.com](https://portal.azure.com) ...
+    - Navigate to your Azure IoT Hub's configuration blade.
+    - In your IoT Hub's blade, click the Shared Access Policies tab.
+    - Click the "iothubowner" policy.
+    - Copy the primary Connection string)
+
+## Use the Azure IoT Device Explorer to monitor data coming from your Device
+
+- Download and install the [Azure IoT Device Explorer](https://github.com/Azure/azure-iot-sdks/releases/download/2016-11-17/SetupDeviceExplorer.msi)
+- Open the Device Explorer.
+- In your IoT Hub's blade in the Azure Management Portal, click the Shared Access Policies tab.
+- Click the "iothubowner" policy.
+- Copy the primary Connection string.
+- Paste the connection string in the IoT Hub Connection String field on the Configuration tab of the Device Explorer
+and click the Update button.
+- Click the Data tab.
+- Select your device in the Device ID dropdown, click the Enable checkbox next to Consumer Group and enter your first name.
+(A consumer group using your first name will have been pre-created)
+
+# Analyze and Visualize Device Data Real-Time
+In this section, we'll build on to the capabilities provided by the Azure IoT Remote Monitoring solution
+by analyzing our device data stream real-time and streaming it real-time to Microsoft Power BI.
+
 ## Create the Azure Resource Group
 Azure Resource Group's provide a number of useful capabilities. One of the primary is to organize your Azure service instances into
 logical groups. Creating a single Resource Group that you'll use for this effort will prove very valuable.
@@ -90,66 +144,19 @@ logical groups. Creating a single Resource Group that you'll use for this effort
 As you add additional Azure services, it's often easiest to simply add them directly from the Resource Group using the
 Add button at the top of your Resource Group blade.
 
-## Use the Azure IoT Device Explorer to register your device and monitor data coming from it.
-
-- (If you have not already done so) Download and install the [Azure IoT Device Explorer](https://github.com/Azure/azure-iot-sdks/releases/download/2016-11-17/SetupDeviceExplorer.msi)
-on to a Windows computer.
-- Open the Device Explorer.
-- In your IoT Hub's blade in the Azure Management Portal, click the Shared Access Policies tab.
-- Click the "iothubowner" policy.
-- Copy the primary Connection string.
-- Paste the connection string in the IoT Hub Connection String field on the Configuration tab of the Device Explorer
-and click the Update button.
-- Click the Data tab.
-- Select your device in the Device ID dropdown, click the Enable checkbox next to Consumer Group and enter your first name.
-(A consumer group using your first name will have been pre-created)
-
-```text
-HostName=amatiotthons1.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=qh/9k+LOOO+RBf9XVdO4w8q/LSZIUQVXttBzIU48ifM=
-```
-
-## Use the Azure IoT Device Explorer to monitor data coming from your Device
-
-- Download and install the [Azure IoT Device Explorer](https://github.com/Azure/azure-iot-sdks/releases/download/2016-11-17/SetupDeviceExplorer.msi)
-- Open the Device Explorer.
-- In your IoT Hub's blade in the Azure Management Portal, click the Shared Access Policies tab.
-- Click the "iothubowner" policy.
-- Copy the primary Connection string.
-- Paste the connection string in the IoT Hub Connection String field on the Configuration tab of the Device Explorer
-and click the Update button.
-- Click the Data tab.
-- Select your device in the Device ID dropdown, click the Enable checkbox next to Consumer Group and enter your first name.
-(A consumer group using your first name will have been pre-created)
-
-## VNC to Raspberry PI and run AMAT Data Simulator
-- After connecting to the Raspberry Pi via VNC, open a Terminal Window.
-- Your terminal window will open to the root directory.
-- Enter the command:
-    ```text
-    cd amatiotconsole
-    ```
-- Enter the command:
-    ```text
-    git pull origin master
-    ```
-- Enter the command:
-    ```text
-    npm install
-    ```
-- Enter the command:
-    ```text
-    node .
-    ```
-
 ## Create the Azure Stream Analytics Job
 
 ### Create the Job
-- Add a Stream Analytics job to your resource group, using the following selections:
+- From your newly create Azure Resource group, click the Add+ icon in the top middle.
+- In the "Search Everything" textbox, enter "Stream Analytics job".  Select "Stream Analytics job" in the resultset dropdown.
+- Click "Stream Analytics job" in the "Results" resultset, and "Create" in the newly opened blade.
+- In the "New Stream Analytics Job" blade, using the following selections:
     - Job name: Provide a name for the Stream Analytics job.
     - Region: Select the appropriate Microsoft Data Center location.
     - Regional Monitoring Storage Account: Depending upon your selected region, you'll be able to select a storage account
     for Stream Analytics to store service monitoring data. It's ok if this isn't available in your region.
 - Click the Create button to create the job.
+- Navigate back to your Resource Group and click the Refresh button to view your newly created Stream Analytics job.
 
 The job will take a few minutes to deploy, after which you can select it your list of Stream Analytics jobs by clicking
 the arrow next to its name.
@@ -179,6 +186,7 @@ located [here](https://docs.microsoft.com/en-us/azure/stream-analytics/stream-an
 - Select Power BI, and click the right arrow icon.
 - In Authorize Connection, click the Authorize Now link and enter the credentials for the Office 365 account you wish
 to use for Power BI. Ensure you click the Sign-In button and that your credentials are successfully authorized and accepted.
+    - If you do not have an Office 365 instance available to you, your lab guide will provide you one.
 - In Microsoft Power BI Settings, complete the following fields:
     - Output alias: Provide an alias for your output which you'll use to refer to it in your query.
     - Dataset name: Provide a name of your dataset to be created in Power BI.
@@ -192,39 +200,22 @@ the Management Portal query window to write and edit your query, I find it a bes
 [Visual Code](https://code.visualstudio.com) to write your query first, especially because I can leverage a source control
 platform like GitHub to place it under source control.
 
-Here's a sample query that leverages all three outputs described in this lab:
-
+The simplest query is to simply pass the data from input to your output.  You can leverage the default query and then change your input and output aliases to those you entered when creating your IoT Hub input and Power BI output ...
 ```sql
-With RawTelemetry AS (
-    SELECT *,
-        DateAdd(hour, -7, System.TimeStamp) as EventDateTime
-    FROM
-        iothub TIMESTAMP BY EventProcessedUtcTime
-),
-RawTelemetryGroupedByMinute AS (
-    SELECT
-        DeviceId,
-        DateAdd(hour, -7, System.TimeStamp) as EventDateTime,
-        Avg(T1) As AvgT1, 
-        Avg(T2) As AvgT2,
-        Avg(Frequency) AS AvgFrequency,
-        Avg(Pressure) As AvgPressure
-    FROM
-        RawTelemetry 
-    Group By DeviceId, EventDateTime, TumblingWindow(minute, 1)
-),
-Alarms AS (
-    SELECT DeviceId, DateAdd(hour, -7, System.TimeStamp) as EventDateTime, 'HighTemperatureAlarm' As AlarmType,
-    CONCAT('High T1 identified on Device ', DeviceId, ' over last 5 minutes.') as AlarmDetail,
-    COUNT(*) AS EventCount
-    FROM RawTelemetryGroupedByMinute
-    WHERE AvgT1 > 100
-    GROUP BY DeviceId, TumblingWindow(Duration(minute, 5)) 
-    HAVING EventCount > 2
-)
-
-select * into powerbiraw from RawTelemetryGroupedByMinute
-select * into powerbiaverage from RawTelemetryGroupedByMinute
-select * into powerbialarm from Alarms
+SELECT
+    *
+INTO
+    [YourOutputAlias]
+FROM
+    [YourInputAlias]
 ```
 
+# Setting Up your Power BI Dashboard
+Power BI is Microsoft's Enterprise Data Visualization platform.
+
+- Navigate to [Power BI](https://powerbi.com).
+- To sign in, you'll need an Office 365 account.  If you don't have access to an Office 365 account, your Microsoft lab guide
+will provide you one.
+- Click on the "My Workspace" icon in the left-hand navigation.
+- Click on the tab "Datasets".
+- Click on the "Create Report" icon under the column "Actions".
