@@ -55,7 +55,7 @@ the Azure IoT Hub Explorer for Non-Windows users with Node.js installed.
 Microsoft Azure IoT Suite is a set of pre-configured IoT solutions which can be quickly spun up in an Azure environment.  For this
 lab, we'll be using the Remote Monitoring solution.
 
-- In your browser, navigate to [www.azureiotsuite.com](www.azureiotsuite.com).
+- In your browser, navigate to [www.azureiotsuite.com](https://www.azureiotsuite.com).
 - Log-in using your credentials associated to your Azure environment.
 - Click the box titled "Create a new solution".
 - Select the Remote Monitoring solution.
