@@ -4,20 +4,73 @@
 
 # Microsoft Azure IoT, Pycom and Sigfox IoT Lab
 
-### Azure Environment and Subscription
+Welcome! This workshop help you get up and running with data flowing into Microsoft Azure from the Pycom
+SiPy device flowing through Sigfox.
 
-An Office 365 / Azure account has been created for you using the username
-[firstname].[lastname]@msp342493.onmicrosoft.com. The password will be provided on the room's whiteboard.
-We recommend that you an in-private browsing session (IE, Edge, Chrome) so there's no conflicts
-with your existing corporate credentials.
+# Start Here!
 
-### Software Requirements
+This set of instructions follows those provided by Pycom and Sigfox.  You can find these instructions here:
 
-- Azure IoT Device Explorer
+- [Pycom Lab Instructions](https://github.com/pycom-education/pycom-workshop-sf)
+- [Sigfox Lab Instructions](https://github.com/aureleq/sigfox-azure-iothub)
+
+As you follow the Sigfox instructions, you may need to follow the instructions below to set-up
+your Microsoft Azure account, if you don't already have one.
+
+Thus, the instructions below assume you've accomplished the following:
+
+1.  Set-up your Pycom SiPy device and having it sending data to Sigfox.
+2.  Set-up your Sigfox account.
+
+# Setting up your Microsoft Azure Account
+
+If you don't already have one, you'll need to set-up a Microsoft Azure tenant.  If you're participating in a
+guided lab with Microsoft, they may provide you a code with a free Azure credit.  Alternatively, you may be
+eligible for a free $200 credit [here](https://azure.microsoft.com/en-us/free/).
+
+### Create Windows Live Id
+If you don't already have a Microsoft account, you can create one at [www.live.com](www.live.com).
+
+### Utilize Azure Credit
+After you've created and logged into your Microsoft account, go to [www.microsoftazurepass.com](www.microsoftazurepass.com)
+and follow the instructions to set-up your Microsoft Azure environment.  If you're attending the June 19th, 2017 event in
+San Francisco, e-Mail Jeff Bennett at jbennett@microsoft.com to receive the code for your Azure credit.
+
+# Software Requirements
+
+For this lab, we'll use the Azure IoT Suite Remote Monitoring solution to view the data flowing from our Pycom device.
+However, if you'd prefer to skip using the Remote Monitoring solution, or have another way of viewing the data
+flowing from your device, you can install the Azure IoT Device Explorer (for Windows users) or, alternatively,
+the Azure IoT Hub Explorer for Non-Windows users with Node.js installed.
+
+- For Windows Users: Azure IoT Device Explorer
     - Download and install the [Azure IoT Device Explorer](https://github.com/Azure/azure-iot-sdks/releases/download/2016-11-17/SetupDeviceExplorer.msi) on
     to a Windows computer.
     - The Device Explorer will be used to connect to Azure IoT Hub to register devices and monitor
     the real-time data coming from them.
+- For Non-Windows Users w/ Node.js installed: Azure IoT Hub Explorer
+    - Download and install the Azure IoT Hub Explorer using the instructions found [here]
+    (https://github.com/Azure/iothub-explorer).
+
+# Set-up Azure IoT Suite Remote Monitoring Solution
+Microsoft Azure IoT Suite is a set of pre-configured IoT solutions which can be quickly spun up in an Azure environment.  For this
+lab, we'll be using the Remote Monitoring solution.
+
+- In your browser, navigate to [www.azureiotsuite.com](www.azureiotsuite.com).
+- Log-in using your credentials associated to your Azure environment.
+- Click the box titled "Create a new solution".
+- Select the Remote Monitoring solution.
+- In the "Create Remote monitoring solution" page ...
+    - Enter an unique solution name in the Solution name field.
+    - Select your Azure subscription in the Subscription dropdown.  If you're using a free Azure Pass credit, the 
+    subscription will be titled "Azure Pass".
+    - Select the Azure region where this solution will run.
+    - At the bottom of the page, click the "Create Solution" button.
+- The provisioning process typically takes 5 - 10 minutes to complete.
+
+Once the provisioning process is complete, you can click the "Launch" button under the "Provisioned solutions" page.
+
+You can also navigate to https://[solution name].azurewebsites.net/Dashboard/Index
 
 ## Create the Azure Resource Group
 Azure Resource Group's provide a number of useful capabilities. One of the primary is to organize your Azure service instances into
