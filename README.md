@@ -202,7 +202,10 @@ platform like GitHub to place it under source control.
 The simplest query is to simply pass the data from input to your output.  You can leverage the default query and then change your input and output aliases to those you entered when creating your IoT Hub input and Power BI output ...
 ```sql
 SELECT
-    *
+    DeviceId,
+    DateAdd(hour, -7, System.TimeStamp) as EventDateTime,
+    CAST(Temperature as bigint) as CurrentTemperature,
+    CAST(Humidity as bigint) as CurrentHumidity
 INTO
     [YourOutputAlias]
 FROM
