@@ -1,4 +1,6 @@
-<img src ="https://github.com/pycom/pycom-libraries/blob/master/img/logo.png" width="300">
+<img src ="https://github.com/jefferybennett/AzureIoT_Pycom_Sigfox/blob/master/imgs/pycomlogo.png" width="300">
+<img src ="https://github.com/jefferybennett/AzureIoT_Pycom_Sigfox/blob/master/imgs/azureiotlogo.png" width="300">
+<img src ="https://github.com/jefferybennett/AzureIoT_Pycom_Sigfox/blob/master/imgs/sigfoxlogo.png" width="300">
 
 # Microsoft Azure IoT, Pycom and Sigfox IoT Lab
 
