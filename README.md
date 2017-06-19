@@ -28,10 +28,10 @@ guided lab with Microsoft, they may provide you a code with a free Azure credit.
 eligible for a free $200 credit [here](https://azure.microsoft.com/en-us/free/).
 
 ### Create Windows Live Id
-If you don't already have a Microsoft account, you can create one at [www.live.com](www.live.com).
+If you don't already have a Microsoft account, you can create one at [www.live.com](https://www.live.com).
 
 ### Utilize Azure Credit
-After you've created and logged into your Microsoft account, go to [www.microsoftazurepass.com](www.microsoftazurepass.com)
+After you've created and logged into your Microsoft account, go to [www.microsoftazurepass.com](https://www.microsoftazurepass.com)
 and follow the instructions to set-up your Microsoft Azure environment.  If you're attending the June 19th, 2017 event in
 San Francisco, e-Mail Jeff Bennett at jbennett@microsoft.com to receive the code for your Azure credit.
 
