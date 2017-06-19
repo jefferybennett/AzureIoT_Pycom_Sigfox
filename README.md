@@ -12,7 +12,6 @@ SiPy device flowing through Sigfox.
 This set of instructions follows those provided by Pycom and Sigfox.  You can find these instructions here:
 
 - [Pycom Lab Instructions](https://github.com/pycom-education/pycom-workshop-sf)
-- [Sigfox Lab Instructions](https://github.com/aureleq/sigfox-azure-iothub)
 
 As you follow the Sigfox instructions, you may need to follow the instructions below to set-up
 your Microsoft Azure account, if you don't already have one.
